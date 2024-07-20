@@ -1,3 +1,4 @@
+import { isValidId } from '../middleware/isValidId.js';
 import { Router } from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import {
@@ -27,6 +28,12 @@ router.patch(
   '/contacts/:contactId',
   validateBody(updateContactSchema),
   ctrlWrapper(patchedContactController),
+);
+
+router.get(
+  '/:contactId',
+  isValidId,
+  ctrlWrapper(getContactByIdController),
 );
 
 export default router;
